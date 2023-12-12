@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RH Challange</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script>
+$(document).ready(function(){
+	$(".checkme").click(function(event){
+		var x = $(this).is(':checked');
+		if (x == true) {
+			$(this).parents(".checkbox-contacts").find('.contacts').show();
+		}
+		else{
+			$(this).parents(".checkbox-contacts").find('.contacts').hide();
+		}
+	});
+})
+</script>
+</head>
+<body>
+
+  <div class="container">
+    <%if @employee.errors.any? %>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul>
+            <% @employee.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>  
+        </ul> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+    
+    <%= form_for @employee, html:{class:"form-group"} do |f| %>
+      <fieldset>
+        <div class="form-inputs">
+          <div class = first-row>
+            <div class="id" width="100px">
+              <%= f.label :id, "Matricula*", style:"margin-right: 145px;" %>
+              <br>
+              <%= f.number_field :id, in: 1..9999, style:"width: 230px;"%>
+            </div>
+            <div class="name">
+              <%= f.label :full_name, "Nome Completo*", style:"margin-right: 480px;" %>
+              <br>
+              <%= f.text_field :full_name, style:"width: 600px;" %>
+            </div>
+            <div class="date" style="margin-right:50px">
+              <%= f.label :birth_date, "Data de Nascimento" %>
+              <br>
+              <%= f.date_field :birth_date, type: 'date', html5: true, style:"width: 135px;" %>
+            </div>
+          </div>
+          <div class="second-row">
+            <div class="city">
+              <%= f.label :origin_city, "Cidade de Nascimento", style:"margin-right: 90px;" %>
+              <br>
+              <%= f.select :origin_city, @cities, {include_blank: "Selecione a cidade de nascimento..."}%>
+            </div>
+            <div class="state">
+              <%= f.label :home_state, "Estado de Nascimento", style:"margin-right: 80px;" %>
+              <br>
+              <%= f.select :home_state, @states, {include_blank: "Selecione o estado de nascimento..."}%>
+            </div>
+            <div class="marital">
+              <%= f.label :marital_status, "Estado Civil", style:"margin-right: 90px;" %>
+              <br>
+              <%= f.select :marital_status, @marital_statuses, {include_blank: "Selecione o estado civil..."} %>
+            </div>
+            <div class="sexes" style="margin-right:100px;">
+              <%= f.label :sex, "Sexo", style:"margin-right: 95px;" %>
+            <br>
+              <%= f.select :sex, @sexes, {include_blank: "Selecione o sexo..."} %>
+            </div>            
+          </div>
+          <div class="third-row">
+            <div class="workspace">
+              <%= f.label :workspace_id, "Lotação",style:"margin-right:75px;" %>
+              <br>
+              <%= f.select :workspace_id, @workspaces, {include_blank: "Selecione a lotação..."}, style:"margin-left:15px;" %>
+            </div>
+            <div class="job_roles">
+              <%= f.label :job_role_id, "Cargo", style:"margin-right:180px;" %>
+              <br>
+              <%= f.select :job_role_id, @job_roles, {include_blank: "Selecione o cargo..."}, style:"margin-right:90px;" %>
+            </div>
+            <div class="checkbox-contacts">
+              <label>
+                <input type="checkbox" class="checkme">Deseja adicionar Contatos?
+              </label>
+
+              <div class="contacts"> 
+                <%= f.fields_for :contacts do |contacts|  %>
+                    <div class="contact-email">
+                      <%= contacts.label :email, "Email" %>
+                      <br>
+                      <%= contacts.text_field :email %>
+                    </div>
+                    <div class="contact-phone">
+                      <%= contacts.label :phone, "Telefone" %>
+                      <br>
+                    <%= contacts.text_field :phone %>
+                    </div>
+                    <div class="contact-mobile-phone">
+                      <%= contacts.label :mobile_phone, "Celular" %>
+                      <br>
+                    <%= contacts.text_field :mobile_phone %>
+                    </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="fourth-row">
+            <div>
+              <%= link_to 'Cancelar', employees_path, class:"btn btn-default"  %>
+            </div>
+            <div class="form-actions">
+                <%= f.button :Salvar , class:"btn btn-success" %>
+            </div>
+          </div>
+        </div>
+      </fieldset>              
+    <% end %>   
+</body>
+</html>

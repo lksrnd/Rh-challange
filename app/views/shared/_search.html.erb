@@ -1,0 +1,53 @@
+<div class="container">
+        <%= form_tag(employees_search_path, method: :get, class:"form1") do %>        
+          <fieldset><legend>Pesquisar</legend>
+            <div class="search">
+              <div class="col-md-9">
+                <%= text_field_tag :term, params[:term], class:"form-control", placeholder:"Pesquisar..." %>
+              </div>
+            </div>
+              <div>
+                <div class="boxsearch">
+                  <div class="sexo">
+                    <b>Sexo</b>
+                      <div class="radio">                    
+                        <label>
+                          <%= radio_button_tag(:sex, 'Masculino', params[:sex]== 'Masculino') %>Masculino                                         
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <%= radio_button_tag(:sex, 'Feminino', params[:sex]== 'Feminino') %>Feminino                          
+                        </label>
+                      </div>
+                  </div>
+                  <div class="workspace">
+                    <b>Lotação</b>
+                      <div>
+                        <%= select_tag(:workspace_id, options_for_select(@workspaces, params[:workspace_id]),prompt: 'Selecione a Lotação', class:"form-select") %>                      
+                      </div>
+                  </div>
+                  <div class="job_role">
+                    <b>Cargo</b>
+                      <div>
+                        <%= select_tag(:job_role_id, options_for_select(@job_roles, params[:job_role_id]),prompt: 'Selecione o Cargo', class:"form-select") %>
+                      </div>
+                  </div>
+                </div>
+                </div>
+              <div>
+                <div class="boxconfirm">
+                  <div class="boxsubmit">
+                    <%= link_to new_employee_path, class:"btn btn-success" do %>
+                      <i class="material-icons">&#xE147;</i><span>Cadastrar Pessoa</a></span>
+                    <% end %>
+                  </div>
+                  <div class="boxsearch2">
+                    <button type="submit" class="btn btn-default">Pesquisar</button>
+                    <% end %>
+                  </div>              
+                </div>
+              </div>
+          </fieldset>          
+      </div>  
+    </div>

@@ -1,0 +1,16 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <% @breadcrumbs.each do |breadcrumb| %>
+      <% if breadcrumb[:path].nil? %>
+        <li class="active">
+        <%= breadcrumb[:label] %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to breadcrumb[:label], breadcrumb[:path] %>
+      <% end %>
+        </li>
+    <% end %>
+  </ol>
+</nav>

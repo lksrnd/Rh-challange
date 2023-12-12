@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RH Challange</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+</head>
+  <body>
+
+  <div class="show_employee">
+    <div class="show1">
+      <div class="id">
+        <p>
+          <strong>Matricula:</strong>
+          <%= @employee.id %>
+        </p>
+      </div>
+      <div class="name">
+        <p>
+          <strong>Nome:</strong>
+          <%= @employee.full_name %>
+        </p>
+      </div>
+      <div class="date">
+        <p>
+          <strong>Data de nascimento:</strong>
+          <%= @employee.birth_date.blank? ? "Não informado" : @employee.birth_date %>
+        </p>
+      </div>
+      <div class="city">
+        <p>
+          <strong>Cidade de nascimento:</strong>
+          <%= @employee.origin_city.blank? ? "Não informado" : @employee.origin_city%>
+        </p>
+      </div>
+    </div>
+    <div class="show2">
+      <div class="state">
+        <p>
+          <strong>Estado de nascimento:</strong>
+          <%= @employee.home_state.blank? ? "Não informado" : @employee.home_state %>
+        </p>
+      </div>
+      <div class="marital_status">
+        <p>
+          <strong>Estado civil:</strong>
+          <%= @employee.marital_status.blank?  ? "Não informado" : @employee.marital_status %>
+        </p>
+      </div>
+      <div class="sex">
+        <p>
+          <strong>Sexo:</strong>
+          <%= @employee.sex.blank? ? "Não informado" : @employee.sex%>
+        </p>
+      </div>
+    </div>
+    <div class="show3">
+      <div class="workspace">
+        <p>
+          <strong>Lotação:</strong>
+          <%= @employee.workspace.title %>
+        </p>
+      </div>
+      <div class="job_role">
+        <p>
+          <strong>Cargo:</strong>
+          <%= @employee.job_role.title %>
+        </p>
+      </div>
+    </div>
+    <div class="show4">
+      <div style="margin-left:50px;">
+        <a><%= link_to 'Voltar', employees_path, class:"btn btn-default"%></a>
+      </div>
+      <div style="text-align:right; margin-right: 50px;">
+        <%= link_to employee_path(@employee), method: :delete, data: { confirm: 'Você tem certeza?'}, class:"btn btn-danger" do %>
+            <i class="fa fa-trash-o" aria-hidden="true" title="Excluir" style="color:#fff"></i><span style="color:#fff">Excluir</span></a>
+            <% end %>
+        <%= link_to edit_employee_path, class:"btn btn-info" do %>
+          <i class="fa fa-pencil" aria-hidden="true" title="Editar"style="color:#fff"></i><span style="color:#fff">Editar</span></a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+
+</body>
+</html>
